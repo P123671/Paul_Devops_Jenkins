@@ -7,23 +7,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/P123671/Paul_Devops_Jenkins.git'
-            }
-        }
-
-        stage('Debug Structure') {
-            steps {
-                sh '''
-                    echo "=== Checking exact file structure ==="
-                    pwd
-                    find . -name "*.java" -type f
-                    echo "=== Checking test file content ==="
-                    cat src/test/java/com/example/AppTest.java || echo "Test file not found!"
-                    echo "=== Checking package info ==="
-                    head -5 src/test/java/com/example/AppTest.java
-                    echo "=== Running maven with more verbose output ==="
-                    mvn test-compile -X | grep -i "test" || echo "No test-related output"
-                '''
+                git branch: 'CompressingExerciseBranch', url: 'https://github.com/P123671/Paul_Devops_Jenkins.git'
             }
         }
 

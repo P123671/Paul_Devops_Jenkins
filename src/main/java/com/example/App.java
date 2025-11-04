@@ -1,11 +1,11 @@
 package com.example;
- 
+
 public class App {
-    public static String getGreeting() {
-        return "Hello from Jenkins!";
+    public static int add(int a, int b) {
+        return a + b;
     }
- 
+
     public static void main(String[] args) {
-        System.out.println(getGreeting());
+        System.out.println("Sum: " + add(2, 3));
     }
 }

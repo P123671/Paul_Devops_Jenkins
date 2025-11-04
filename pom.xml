@@ -1,72 +1,65 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-https://maven.apache.org/xsd/maven-4.0.0.xsd">
- 
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
- 
     <groupId>com.example</groupId>
-<artifactId>devops-lab</artifactId>
-<version>1.0.0</version>
-<packaging>jar</packaging>
- 
-    <name>DevOps Lab Project</name>
-<description>Sample Java project for Jenkins CI/CD bootcamp with Checkstyle and JUnit</description>
- 
-    <properties>
-<maven.compiler.source>11</maven.compiler.source>
-<maven.compiler.target>11</maven.compiler.target>
-<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-<checkstyle.config.location>google_checks.xml</checkstyle.config.location>
-</properties>
- 
+    <artifactId>devops-lab</artifactId>
+    <version>1.0.0</version>
+
+    <build>
+        <plugins>
+            <!-- Unit Tests -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0</version>
+            </plugin>
+
+            <!-- Checkstyle -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <configLocation>google_checks.xml</configLocation>
+                    <encoding>UTF-8</encoding>
+                    <consoleOutput>true</consoleOutput>
+                    <failsOnError>true</failsOnError>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Spotless -->
+            <plugin>
+                <groupId>com.diffplug.spotless</groupId>
+                <artifactId>spotless-maven-plugin</artifactId>
+                <version>2.43.0</version>
+                <configuration>
+                    <java>
+                        <googleJavaFormat />
+                    </java>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
     <dependencies>
-<!-- JUnit 5 for tests -->
-<dependency>
-<groupId>org.junit.jupiter</groupId>
-<artifactId>junit-jupiter</artifactId>
-<version>5.8.2</version>
-<scope>test</scope>
-</dependency>
-</dependencies>
- 
-<build>
-<plugins>
- 
-    <!-- Checkstyle: linter -->
-<plugin>
-<groupId>org.apache.maven.plugins</groupId>
-<artifactId>maven-checkstyle-plugin</artifactId>
-<version>3.3.1</version>
-<configuration>
-<configLocation>google_checks.xml</configLocation>
-<failOnViolation>true</failOnViolation>
-<linkXRef>false</linkXRef>
-</configuration>
-<executions>
-<execution>
-<phase>verify</phase>
-<goals>
-<goal>check</goal>
-</goals>
-</execution>
-</executions>
-</plugin>
- 
-    <!-- Spotless: formatter -->
-<plugin>
-<groupId>com.diffplug.spotless</groupId>
-<artifactId>spotless-maven-plugin</artifactId>
-<version>2.43.0</version>
-<configuration>
-<java>
-<googleJavaFormat />
-</java>
-</configuration>
-</plugin>
- 
-  </plugins>
-</build>
- 
+        <!-- JUnit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>
+

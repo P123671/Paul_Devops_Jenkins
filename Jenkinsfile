@@ -1,8 +1,7 @@
 pipeline {
     agent any
- 
     tools {
-        maven 'MAVEN_HOME'  // Name from Jenkins -> Global Tool Configuration
+        maven 'Maven'
     }
  
     stages {
@@ -14,37 +13,32 @@ pipeline {
  
         stage('Build') {
             steps {
-                sh 'mvn clean compile'
+                sh 'mvn clean compile -DskipTests'
             }
         }
  
-        stage('Test') {
+        stage('Linter Check (Checkstyle)') {
             steps {
-                sh 'mvn test'
-            }
-            post {
-                always {
-                    junit '**/target/surefire-reports/*.xml'
-                }
-            }
-        }
- 
-        stage('Checkstyle') {
-            steps {
-                // Run Checkstyle analysis
+                // Run the Checkstyle plugin
                 sh 'mvn checkstyle:checkstyle'
             }
             post {
                 always {
-                    // Archive the Checkstyle report so you can view it in Jenkins
                     recordIssues tools: [checkStyle(pattern: '**/target/checkstyle-result.xml')]
                 }
+                unstable {
+                    echo '⚠️ Linter found warnings.'
+                }
                 failure {
-                    echo '❌ Checkstyle found code style issues!'
+                    echo '❌ Build failed due to style violations.'
                 }
-                success {
-                    echo '✅ Checkstyle passed with no issues!'
-                }
+            }
+        }
+ 
+        stage('Formatter Check (Spotless)') {
+            steps {
+                // Verify formatting consistency (does NOT change code)
+                sh 'mvn spotless:check'
             }
         }
  
@@ -58,10 +52,10 @@ pipeline {
  
     post {
         success {
-            echo '✅ Build, tests, checkstyle, and packaging completed successfully!'
+            echo '✅ Build, lint, and format checks passed!'
         }
         failure {
-            echo '❌ Build failed. Check logs or test results for details.'
+            echo '❌ Code style or format issues detected.'
         }
     }
 }

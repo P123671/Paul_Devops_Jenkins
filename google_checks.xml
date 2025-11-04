@@ -4,13 +4,16 @@
     "https://checkstyle.org/dtds/configuration_1_3.dtd">
 
 <module name="Checker">
-<module name="TreeWalker">
-<module name="WhitespaceAfter"/>
-<module name="WhitespaceAround"/>
-<module name="Indentation"/>
-<module name="LineLength">
-<property name="max" value="120"/>
-</module>
-<module name="MethodName"/>
-</module>
+    <!-- These modules go directly under Checker -->
+    <module name="LineLength">
+        <property name="max" value="120"/>
+    </module>
+    
+    <!-- TreeWalker contains checks that examine the AST -->
+    <module name="TreeWalker">
+        <module name="WhitespaceAfter"/>
+        <module name="WhitespaceAround"/>
+        <module name="Indentation"/>
+        <module name="MethodName"/>
+    </module>
 </module>

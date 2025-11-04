@@ -2,7 +2,7 @@ pipeline {
     agent any
  
     tools {
-        maven 'Maven'  // Name from Jenkins -> Global Tool Configuration
+        maven 'MAVEN_HOME'  // Name from Jenkins -> Global Tool Configuration
     }
  
     stages {

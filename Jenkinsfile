@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/YOUR_USERNAME/devops-lab.git'
+                git branch: 'DayThreeJunitexercise', url: 'https://github.com/P123671/Paul_Devops_Jenkins.git'
             }
         }
  

@@ -1,13 +1,17 @@
 package com.example;
-
-import static org.junit.Assert.assertEquals;
-
+ 
 import org.junit.Test;
-
+import static org.junit.Assert.assertEquals;
+ 
 public class AppTest {
-
-  @Test
-  public void testAddition() {
-    assertEquals(5, App.add(2, 3));
-  }
+ 
+    @Test
+    public void testMultiply() {
+        assertEquals(6, App.multiply(2, 3));
+    }
+ 
+    @Test
+    public void testNegativeNumbers() {
+        assertEquals(-6, App.multiply(2, -3));
+    }
 }

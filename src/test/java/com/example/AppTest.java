@@ -7,7 +7,7 @@ public class AppTest {
  
     @Test
     public void testMultiply() {
-        assertEquals(6, App.multiply(2, 3)); // 2x3 = 6 ✅
+    	assertEquals(7, App.multiply(2, 3)); // WRONG ON PURPOSE
     }
  
     @Test
